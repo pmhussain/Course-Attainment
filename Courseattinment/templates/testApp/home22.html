@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+{%extends 'testApp/base.html'%}
+{%block content%}
+
+    <div class="container" align=center style="width:100%">
+      <div class="jumbotron">
+        <h1 style = "color: red; padding-bottom: 10px;"><u>CO Attainment, CO-PO & PSO Attainment</u></h1>
+
+        <table border=2 style="width:100%">
+
+          <tr>
+            <th colspan="2" rowspan="2">Examination</th>
+            <th colspan="4">MID-1 Threshold</th>
+            <th colspan="2">60%</th>
+            <th colspan="4">MID-2 Threshold</th>
+            <th colspan="2">60%</th>
+            <th rowspan="2">External Threshold (40%)</th>
+          </tr>
+
+          <tr>
+            <th colspan="4">Descriptive</th>
+            <th rowspan="2" style="vertical-align:top">Objective</th>
+            <th rowspan="2" style="vertical-align:top">Assignment</th>
+            <th colspan="4">Descriptive</th>
+            <th rowspan="2" style="vertical-align:top">Objective</th>
+            <th rowspan="2" style="vertical-align:top">Assignment</th>
+          </tr>
+
+          <tr>
+            <th colspan="2">Question Number</th>
+            <th>Q1</th>
+            <th>Q2</th>
+            <th>Q3</th>
+            <th>Q4</th>
+            <th>Q1</th>
+            <th>Q2</th>
+            <th>Q3</th>
+            <th>Q4</th>
+            <th>External</th>
+          </tr>
+
+          <tr>
+            <th colspan="2">Maximum Marks</th>
+            <th>5</th>
+            <th>5</th>
+            <th>5</th>
+            <th>5</th>
+            <th>10</th>
+            <th>5</th>
+            <th>5</th>
+            <th>5</th>
+            <th>5</th>
+            <th>5</th>
+            <th>10</th>
+            <th>5</th>
+            <th>75</th>
+          </tr>
+
+          <tr>
+            <th>Sl.No.</th>
+            <th>Roll No.</th>
+            <th>CO1</th>
+            <th>CO1</th>
+            <th>CO2</th>
+            <th>CO2</th>
+            <th>CO3</th>
+            <th>CO1-CO5</th>
+            <th>CO3</th>
+            <th>CO4</th>
+            <th>CO4</th>
+            <th>CO5</th>
+            <th>CO5</th>
+            <th>CO1-CO5</th>
+            <th>CO1-CO5</th>
+          </tr>
+          {%for mark in studentsmarks%}
+          <tr>
+            <th>{{forloop.counter}}</th>
+            <th>{{mark.rollno}}</th>
+            <th>{{mark.m1_q1_marks}}</th>
+            <th>{{mark.m1_q2_marks}}</th>
+            <th>{{mark.m1_q3_marks}}</th>
+            <th>{{mark.m1_q4_marks}}</th>
+            <th>{{mark.m1_objective_marks}}</th>
+            <th>{{mark.m1_assignment_marks}}</th>
+            <th>{{mark.m2_q1_marks}}</th>
+            <th>{{mark.m2_q2_marks}}</th>
+            <th>{{mark.m2_q3_marks}}</th>
+            <th>{{mark.m2_q4_marks}}</th>
+            <th>{{mark.m2_objective_marks}}</th>
+            <th>{{mark.m2_assignment_marks}}</th>
+            <th>{{mark.ext_marks}}</th>
+          </tr>
+         {%endfor%}
+          <tr>
+            <th colspan="2">Total Number of Students Attempted (A)</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <th colspan="2">Number of students scored >= Threshold (B)</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <th colspan="2">Actual  %of students on or above  Threshold C = B / A * 100 </th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <th colspan="2">Mapping with Course Outcome</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <th colspan="2">Attainment Level</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+
+
+
+        </table>
+
+
+      </div>
+    </div>
+
+    <script>
+    const nodeList = document.querySelectorAll(".level");
+    for (let i = 0; i < nodeList.length; i++) {
+      console.log(nodeList[i].innerHTML)
+      if (nodeList[i].innerHTML == "None" || nodeList[i].innerHTML == "0" ){
+        // nodeList[i].style.backgroundColor = "red";
+        nodeList[i].innerHTML = "-";
+      }
+    }
+    </script>
+{%endblock%}

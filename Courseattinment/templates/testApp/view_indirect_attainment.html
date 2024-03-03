@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{%extends 'testApp/base.html'%}
+{%load static%}
+{%block content%}
+<link rel="stylesheet" href="{% static 'css/course_attainment_style.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<div class="container" align=left style="width:50%">
+  <div class="jumbotron">
+      <h1 style = "color: red; padding-bottom: 10px;">Indirect Survey Attainment</u></h1>
+      <table border=2 style="width:50%">
+        <tr>
+          <th>CO</th>
+          <th>High</th>
+          <th>Medium</th>
+          <th>Low</th>
+          <th>Attainment</th>
+        </tr>
+       {%for i in indirects%}
+        <tr>
+          <th>{{i.co}}</th>
+          <th>{{i.high}}</th>
+          <th>{{i.medium}}</th>
+          <th>{{i.low}}</th>
+          <th>{{i.attainment}}</th>
+        </tr>
+        {%endfor%}
+      </table><br>
+      <a href="{%url 'edit_indirect_attainment'%}" class="btn btn-primary"> Edit/Update Attainment Values</a>
+  </div>
+</div>
+</script>
+{%endblock%}

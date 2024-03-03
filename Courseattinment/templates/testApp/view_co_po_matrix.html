@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{%extends 'testApp/base.html'%}
+{%load static%}
+{%block content%}
+<link rel="stylesheet" href="{% static 'css/course_attainment_style.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<div class="container" align=left style="width:70%">
+  <div class="jumbotron">
+      <h1 style = "color: red; padding-bottom: 10px;">CO-PO/PSO Matrix</u></h1>
+      {%include 'testApp/messages.html'%}
+      <table border=2 style="width:100%">
+        <tr>
+          <th>CO↓/PO→</th>
+          <th>PO1</th>
+          <th>PO2</th>
+          <th>PO3</th>
+          <th>PO4</th>
+          <th>PO5</th>
+          <th>PO6</th>
+          <th>PO7</th>
+          <th>PO8</th>
+          <th>PO9</th>
+          <th>PO10</th>
+          <th>PO11</th>
+          <th>PO12</th>
+          <th style="border-left: 5px solid black;">PSO1</th>
+          <th>PSO2</th>
+          <th>PSO3</th>
+
+        </tr>
+        {%for i in copolevels%}
+        <tr>
+          <th>{{i.co}}</th>
+          <th class="level">{{i.po1}}</th>
+          <th class="level">{{i.po2}}</th>
+          <th class="level">{{i.po3}}</th>
+          <th class="level" class="level" class="level">{{i.po4}}</th>
+          <th class="level" class="level">{{i.po5}}</th>
+          <th class="level">{{i.po6}}</th>
+          <th class="level">{{i.po7}}</th>
+          <th class="level">{{i.po8}}</th>
+          <th class="level">{{i.po9}}</th>
+          <th class="level">{{i.po10}}</th>
+          <th class="level">{{i.po11}}</th>
+          <th class="level">{{i.po12}}</th>
+          <th class="level" style="border-left: 5px solid black;" >{{i.pso1}}</th>
+          <th class="level">{{i.pso2}}</th>
+          <th class="level">{{i.pso3}}</th>
+        </tr>
+        {%endfor%}
+
+        <th>PO Correlation level</th>
+        <th class="level">{{po1_avg|floatformat:2}}</th>
+        <th class="level">{{po2_avg|floatformat:2}}</th>
+        <th class="level">{{po3_avg|floatformat:2}}</th>
+        <th class="level">{{po4_avg|floatformat:2}}</th>
+        <th class="level">{{po5_avg|floatformat:2}}</th>
+        <th class="level">{{po6_avg|floatformat:2}}</th>
+        <th class="level">{{po7_avg|floatformat:2}}</th>
+        <th class="level">{{po8_avg|floatformat:2}}</th>
+        <th class="level">{{po9_avg|floatformat:2}}</th>
+        <th class="level">{{po10_avg|floatformat:2}}</th>
+        <th class="level">{{po11_avg|floatformat:2}}</th>
+        <th class="level">{{po12_avg|floatformat:2}}</th>
+
+        <th class="level" style="border-left: 5px solid black; width: 60px; height:60px">{{pso1_avg}}</th>
+        <th class="level">{{pso2_avg}}</th>
+        <th class="level">{{pso3_avg}}</th>
+
+      </table><br>
+      <a href="{%url 'edit_co_po_matrix'%}" class="btn btn-primary"> Edit/Update CO-PO/PSO Values</a>
+
+  </div>
+</div>
+<script>
+const nodeList = document.querySelectorAll(".level");
+for (let i = 0; i < nodeList.length; i++) {
+  console.log(nodeList[i].innerHTML)
+  if (nodeList[i].innerHTML == "None" || nodeList[i].innerHTML == "0" ){
+    // nodeList[i].style.backgroundColor = "red";
+    nodeList[i].innerHTML = "-";
+  }
+}
+</script>
+{%endblock%}

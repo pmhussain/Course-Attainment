@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+{%extends 'testApp/base.html'%}
+{%load static%}
+{%block content%}
+<link rel="stylesheet" href="{% static 'css/course_attainment_style.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<div class="container" align=center style="width:100%">
+  <div class="jumbotron">
+    <h1 style = "color: red; padding-bottom: 10px;">Course Outcomes</u></h1>
+    <table border=2 style="width:100%">
+      <tr>
+        <th>CO</th>
+        <th>Description</th>
+      </tr>
+      {%for co in cos%}
+      <tr>
+        <th>{{co.co}}</th>
+        <th style="text-align:left">{{co.description}}</th>
+      </tr>
+      {%endfor%}
+    </table>
+
+    <h1 style = "color: red; padding-bottom: 10px;">Program Outcomes</u></h1>
+    <table border=2 style="width:100%">
+      <tr>
+        <th>PO</th>
+        <th>Description</th>
+      </tr>
+      {%for po in pos%}
+      <tr>
+        <th>{{po.po}}</th>
+        <th style="text-align:left">{{po.description}}</th>
+      </tr>
+      {%endfor%}
+    </table>
+
+    <h1 style = "color: red; padding-bottom: 10px;">Program Specific Outcomes</u></h1>
+    <table border=2 style="width:100%">
+      <tr>
+        <th>PSO</th>
+        <th>Description</th>
+      </tr>
+      {%for pso in psos%}
+      <tr>
+        <th>{{pso.pso}}</th>
+        <th style="text-align:left">{{pso.description}}</th>
+      </tr>
+      {%endfor%}
+    </table>
+
+    <h1 style = "color: red; padding-bottom: 10px;">CO-PO Mapping</u></h1>
+    <table border=2 style="width:100%">
+      <tr>
+        <th>CO</th>
+        <th>POS Mapped</th>
+      </tr>
+      {%for copomap in copomaps%}
+      <tr>
+        <th>{{copomap.co}}</th>
+        <th style="text-align:left">{{copomap.pos_mapped}}</th>
+      </tr>
+      {%endfor%}
+    </table>
+
+    <h1 style = "color: red; padding-bottom: 10px;">Attainment Levels</u></h1>
+    <table border=2 style="width:30%">
+      <tr>
+        <th colspan="3">SCALE</th>
+      </tr>
+      <tr>
+        <th>Low</th>
+        <th>1  </th>
+        <th>51% - 60%</th>
+      </tr>
+
+      <tr>
+        <th>Medium</th>
+        <th>2   </th>
+        <th>61% - 75%</th>
+      </tr>
+
+      <tr>
+        <th>High</th>
+        <th>3   </th>
+        <th>76% - 100%</th>
+      </tr>
+    </table>
+
+    <h1 style = "color: red; padding-bottom: 10px;">Indirect Survey Attainment</u></h1>
+    <table border=2 style="width:50%">
+      <tr>
+        <th>CO</th>
+        <th>High</th>
+        <th>Medium</th>
+        <th>Low</th>
+        <th>Attainment</th>
+      </tr>
+     {%for i in indirects%}
+      <tr>
+        <th>{{i.co}}</th>
+        <th>{{i.high}}</th>
+        <th>{{i.medium}}</th>
+        <th>{{i.low}}</th>
+        <th>{{i.attainment}}</th>
+      </tr>
+      {%endfor%}
+    </table>
+
+    <h1 style = "color: red; padding-bottom: 10px;">Course Attainment</u></h1>
+    <table border=2 style="width:100%">
+      <tr>
+        <th>Course Outcomes</th>
+        <th>Internal Assessment</th>
+        <th>External Assessment</th>
+        <th>Direct Attainment (DA = (X*30%)+(Y*70%))</th>
+        <th>Indirect Attainment </th>
+        <th>Final Attainment (FA = (DA*80%) + (IA*20%))</th>
+      </tr>
+     {%for i in indirects%}
+      <tr>
+        <th>{{i.co}}</th>
+        <th>{{i.high}}</th>
+        <th>{{i.medium}}</th>
+        <th>{{i.low}}</th>
+        <th>{{i.attainment}}</th>
+        <th>{{i.attainment}}</th>
+      </tr>
+      {%endfor%}
+      <tr>
+        <th colspan="5" style= " text-align:right; color:blue">Course Attainment Level</th>
+        <th>Attained Value here</th>
+      </tr>
+    </table>
+
+
+
+
+    <h1 style = "color: red; padding-bottom: 10px;">CO-PO Matrix</u></h1>
+    <table border=2 style="width:100%">
+      <tr>
+        <th>CO↓/PO→</th>
+        <th>PO1</th>
+        <th>PO2</th>
+        <th>PO3</th>
+        <th>PO4</th>
+        <th>PO5</th>
+        <th>PO6</th>
+        <th>PO7</th>
+        <th>PO8</th>
+        <th>PO9</th>
+        <th>PO10</th>
+        <th>PO11</th>
+        <th>PO12</th>
+      </tr>
+      {%for i in copolevels%}
+      <tr>
+        <th>{{i.co}}</th>
+        <th>{{i.po1}}</th>
+        <th>{{i.po2}}</th>
+        <th>{{i.po3}}</th>
+        <th>{{i.po4}}</th>
+        <th>{{i.po5}}</th>
+        <th>{{i.po6}}</th>
+        <th>{{i.po7}}</th>
+        <th>{{i.po8}}</th>
+        <th>{{i.po9}}</th>
+        <th>{{i.po10}}</th>
+        <th>{{i.po11}}</th>
+        <th>{{i.po12}}</th>
+      </tr>
+      {%endfor%}
+
+      <th>PO Correlation level</th>
+      <th class="level">{{po1_avg|floatformat:2}}</th>
+      <th class="level">{{po2_avg|floatformat:2}}</th>
+      <th class="level">{{po3_avg|floatformat:2}}</th>
+      <th class="level">{{po4_avg|floatformat:2}}</th>
+      <th class="level">{{po5_avg|floatformat:2}}</th>
+      <th class="level">{{po6_avg|floatformat:2}}</th>
+      <th class="level">{{po7_avg|floatformat:2}}</th>
+      <th class="level">{{po8_avg|floatformat:2}}</th>
+      <th class="level">{{po9_avg|floatformat:2}}</th>
+      <th class="level">{{po10_avg|floatformat:2}}</th>
+      <th class="level">{{po11_avg|floatformat:2}}</th>
+      <th class="level">{{po12_avg|floatformat:2}}</th>
+    </table>
+
+    <h1 style = "color: red; padding-bottom: 10px;">PO Attainment</u></h1>
+    <table border=2 style="width:100%">
+      <tr>
+        <th>PO→</th>
+        <th>PO1</th>
+        <th>PO2</th>
+        <th>PO3</th>
+        <th>PO4</th>
+        <th>PO5</th>
+        <th>PO6</th>
+        <th>PO7</th>
+        <th>PO8</th>
+        <th>PO9</th>
+        <th>PO10</th>
+        <th>PO11</th>
+        <th>PO12</th>
+      </tr>
+      <tr>
+        <th>Attainment Level</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </table>
+<br><br>
+    <h1 style = "color: red; padding-bottom: 10px;">CO-PSO Matrix</u></h1>
+    <table border=2 style="width:50%">
+      <tr>
+        <th>CO↓/PSO→</th>
+        <th>PSO1</th>
+        <th>PSO2</th>
+        <th>PSO3</th>
+      </tr>
+      {%for i in copsolevels%}
+      <tr>
+        <th>{{i.co}}</th>
+        <th>{{i.pso1}}</th>
+        <th>{{i.pso2}}</th>
+        <th>{{i.pso3}}</th>
+      </tr>
+      {%endfor%}
+
+    </tr>
+      <th>PSO Correlation</th>
+      <th class="level">{{pso1_avg}}</th>
+      <th class="level">{{pso2_avg}}</th>
+      <th class="level">{{pso3_avg}}</th>
+    </tr>
+    </table>
+
+    <h1 style = "color: red; padding-bottom: 10px;">PSO Attainment</u></h1>
+    <table border=2 style="width:50%">
+      <tr>
+        <th>PSO→</th>
+        <th>PSO1</th>
+        <th>PSO2</th>
+        <th>PSO3</th>
+      </tr>
+        <th>PSO Attainment Level</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </table>
+
+
+
+  </div>
+</div>
+
+<script>
+const nodeList = document.querySelectorAll(".level");
+for (let i = 0; i < nodeList.length; i++) {
+  if (nodeList[i].innerHTML == "None"){
+    // nodeList[i].style.backgroundColor = "red";
+    nodeList[i].innerHTML = "-";
+  }
+}
+</script>
+
+{%endblock%}

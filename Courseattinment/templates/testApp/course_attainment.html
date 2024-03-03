@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{%extends 'testApp/base.html'%}
+{%load static%}
+{%block content%}
+<link rel="stylesheet" href="{% static 'css/course_attainment_style.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<div class="container" align=center style="width:50%">
+  <div class="jumbotron">
+    <h1 style = "color: red; padding-bottom: 10px;">Course Attainment</u></h1>
+    <table border=2 style="width:70%">
+      <tr>
+        <th>Course Outcomes</th>
+        <th>Internal Assessment</th>
+        <th>External Assessment</th>
+        <th>Direct Attainment (DA = (X*30%)+(Y*70%))</th>
+        <th>Indirect Attainment </th>
+        <th>Final Attainment (FA = (DA*80%) + (IA*20%))</th>
+      </tr>
+
+     {%for i in course_attainment%}
+      <tr>
+        <th>{{i.co}}</th>
+        <th>{{i.internal|floatformat:2}}</th>
+        <th>{{i.external|floatformat:2}}</th>
+        <th>{{i.direct|floatformat:2}}</th>
+        <th>{{i.indirect.attainment|floatformat:2}}</th>
+        <th>{{i.final|floatformat:2}}</th>
+      </tr>
+      {%endfor%}
+      <tr>
+        <th colspan="5" style= " text-align:right; color:blue">Course Attainment Level</th>
+        <th>{{course_attainment_value|floatformat:2}}</th>
+      </tr>
+    </table>
+  </div>
+</div>
+</script>
+{%endblock%}

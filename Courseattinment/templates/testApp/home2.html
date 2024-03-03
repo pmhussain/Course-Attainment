@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+{%extends 'testApp/base.html'%}
+{%load static%}
+{%block content%}
+<link rel="stylesheet" href="{% static 'css/course_attainment_style.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<div class="container" align=center style="width:100%">
+  <div class="jumbotron">
+    <h1 style = "color: red; padding-bottom: 10px;"><u>CO Attainment, CO-PO & PSO Attainment</u></h1>
+
+    <table border=2 style="width:100%">
+      {%for m in m1_marks%}
+      <tr>
+        <th>m.student.rollno</th>
+        {%for q in question%}
+        <th></th>
+        {%endfor%}
+      </tr>
+      {%endfor%}
+
+    </table>
+
+    <table border=2 style="width:100%">
+
+      <tr>
+        <th colspan="2" rowspan="2">Examination</th>
+        <th colspan="4">MID-1 Threshold</th>
+        <th colspan="2">60%</th>
+        <th colspan="4">MID-2 Threshold</th>
+        <th colspan="2">60%</th>
+        <th rowspan="2">External Threshold (40%)</th>
+      </tr>
+
+      <tr>
+        <th colspan="4">Descriptive</th>
+        <th rowspan="2" style="vertical-align:top">Objective</th>
+        <th rowspan="2" style="vertical-align:top">Assignment</th>
+        <th colspan="4">Descriptive</th>
+        <th rowspan="2" style="vertical-align:top">Objective</th>
+        <th rowspan="2" style="vertical-align:top">Assignment</th>
+      </tr>
+
+      <tr>
+        <th colspan="2">Question Number</th>
+        <th>Q1</th>
+        <th>Q2</th>
+        <th>Q3</th>
+        <th>Q4</th>
+        <th>Q1</th>
+        <th>Q2</th>
+        <th>Q3</th>
+        <th>Q4</th>
+        <th>External</th>
+      </tr>
+
+      <tr>
+        <th colspan="2">Maximum Marks</th>
+        <th>5</th>
+        <th>5</th>
+        <th>5</th>
+        <th>5</th>
+        <th>10</th>
+        <th>5</th>
+        <th>5</th>
+        <th>5</th>
+        <th>5</th>
+        <th>5</th>
+        <th>10</th>
+        <th>5</th>
+        <th>75</th>
+      </tr>
+
+      <tr>
+        <th>Sl.No.</th>
+        <th>Roll No.</th>
+        <th>CO1</th>
+        <th>CO1</th>
+        <th>CO2</th>
+        <th>CO2</th>
+        <th>CO3</th>
+        <th>CO1-CO5</th>
+        <th>CO3</th>
+        <th>CO4</th>
+        <th>CO4</th>
+        <th>CO5</th>
+        <th>CO5</th>
+        <th>CO1-CO5</th>
+        <th>CO1-CO5</th>
+      </tr>
+      {%for mark in studentsmarks%}
+      <tr>
+        <th>{{forloop.counter}}</th>
+        <th>{{mark.rollno}}</th>
+        <th class='marks'>{{mark.m1_q1_marks}}</th>
+        <th class='marks'>{{mark.m1_q2_marks}}</th>
+        <th class='marks'>{{mark.m1_q3_marks}}</th>
+        <th class='marks'>{{mark.m1_q4_marks}}</th>
+        <th class='marks'>{{mark.m1_objective_marks}}</th>
+        <th class='marks'>{{mark.m1_assignment_marks}}</th>
+        <th class='marks'>{{mark.m2_q1_marks}}</th>
+        <th class='marks'>{{mark.m2_q2_marks}}</th>
+        <th class='marks'>{{mark.m2_q3_marks}}</th>
+        <th class='marks'>{{mark.m2_q4_marks}}</th>
+        <th class='marks'>{{mark.m2_objective_marks}}</th>
+        <th class='marks'>{{mark.m2_assignment_marks}}</th>
+        <th class='marks'>{{mark.ext_marks}}</th>
+
+      </tr>
+     {%endfor%}
+
+
+      <tr>
+        <th colspan="2">Total Number of Students Attempted (A)</th>
+        <th>{{m1_q1_attempt_count}}</th>
+        <th>{{m1_q2_attempt_count}}</th>
+        <th>{{m1_q3_attempt_count}}</th>
+        <th>{{m1_q4_attempt_count}}</th>
+        <th>{{m1_quiz_attempt_count}}</th>
+        <th>{{m1_assign_attempt_count}}</th>
+        <th>{{m2_q1_attempt_count}}</th>
+        <th>{{m2_q2_attempt_count}}</th>
+        <th>{{m2_q3_attempt_count}}</th>
+        <th>{{m2_q4_attempt_count}}</th>
+        <th>{{m2_quiz_attempt_count}}</th>
+        <th>{{m2_assign_attempt_count}}</th>
+        <th>{{ext_attempt_count}}</th>
+      </tr>
+      <tr>
+        <th colspan="2">Number of students scored >= Threshold (B)</th>
+        <th>{{m1_q1_gth_count}}</th>
+        <th>{{m1_q2_gth_count}}</th>
+        <th>{{m1_q3_gth_count}}</th>
+        <th>{{m1_q4_gth_count}}</th>
+        <th>{{m1_quiz_gth_count}}</th>
+        <th>{{m1_assign_gth_count}}</th>
+        <th>{{m2_q1_gth_count}}</th>
+        <th>{{m2_q2_gth_count}}</th>
+        <th>{{m2_q3_gth_count}}</th>
+        <th>{{m2_q4_gth_count}}</th>
+        <th>{{m2_quiz_gth_count}}</th>
+        <th>{{m2_assign_gth_count}}</th>
+        <th>{{ext_gth_count}}</th>
+      </tr>
+      <tr>
+        <th colspan="2">Actual  %of students on or above  Threshold C = B / A * 100 </th>
+        <th>{{m1_q1_gth_percnt}}%</th>
+        <th>{{m1_q2_gth_percnt}}%</th>
+        <th>{{m1_q3_gth_percnt}}%</th>
+        <th>{{m1_q4_gth_percnt}}%</th>
+        <th>{{m1_quiz_gth_percnt}}%</th>
+        <th>{{m1_assign_gth_percnt}}%</th>
+        <th>{{m2_q1_gth_percnt}}%</th>
+        <th>{{m2_q2_gth_percnt}}%</th>
+        <th>{{m2_q3_gth_percnt}}%</th>
+        <th>{{m2_q4_gth_percnt}}%</th>
+        <th>{{m2_quiz_gth_percnt}}%</th>
+        <th>{{m2_assign_gth_percnt}}%</th>
+        <th>{{ext_gth_percnt}}%</th>
+      </tr>
+
+      <tr>
+        <th colspan="2">Mapping with Course Outcome</th>
+        {%for att in attainment%}
+        <th>{{att.total_attempted}}</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        {%endfor%}
+      </tr>
+
+      <tr>
+        <th colspan="2">Attainment Level</th>
+        <th>{{m1_q1_att_level}}</th>
+        <th>{{m1_q2_att_level}}</th>
+        <th>{{m1_q3_att_level}}</th>
+        <th>{{m1_q4_att_level}}</th>
+        <th>{{m1_quiz_att_level}}</th>
+        <th>{{m1_assign_att_level}}</th>
+        <th>{{m2_q1_att_level}}</th>
+        <th>{{m2_q2_att_level}}</th>
+        <th>{{m2_q3_att_level}}</th>
+        <th>{{m2_q4_att_level}}</th>
+        <th>{{m2_quiz_att_level}}</th>
+        <th>{{m2_assign_att_level}}</th>
+        <th>{{ext_att_level}}</th>
+      </tr>
+
+
+
+    </table>
+
+
+  </div>
+</div>
+<script>
+const nodeList = document.querySelectorAll(".marks");
+for (let i = 0; i < nodeList.length; i++) {
+  if (nodeList[i].innerHTML == "None"){
+    // nodeList[i].style.backgroundColor = "red";
+    nodeList[i].innerHTML = "";
+  }
+}
+</script>
+{%endblock%}

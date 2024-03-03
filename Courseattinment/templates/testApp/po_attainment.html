@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{%extends 'testApp/base.html'%}
+{%load static%}
+{%block content%}
+<link rel="stylesheet" href="{% static 'css/course_attainment_style.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<div class="container" align=center style="width:50%">
+  <div class="jumbotron">
+    <h1 style = "color: red; padding-bottom: 10px;">PO Attainment</u></h1>
+    <table border=2 style="width:100%">
+      <tr>
+        <th>PO / PSO →</th>
+        <th>PO1</th>
+        <th>PO2</th>
+        <th>PO3</th>
+        <th>PO4</th>
+        <th>PO5</th>
+        <th>PO6</th>
+        <th>PO7</th>
+        <th>PO8</th>
+        <th>PO9</th>
+        <th>PO10</th>
+        <th>PO11</th>
+        <th>PO12</th>
+        <th style="border-left: 5px solid black;">PSO1</th>
+        <th>PSO2</th>
+        <th>PSO3</th>
+      </tr>
+      <tr>
+        <th>Attainment Level</th>
+        <th>{{po1_attainment|floatformat:2}}</th>
+        <th>{{po2_attainment|floatformat:2}}</th>
+        <th>{{po3_attainment|floatformat:2}}</th>
+        <th>{{po4_attainment|floatformat:2}}</th>
+        <th>{{po5_attainment|floatformat:2}}</th>
+        <th>{{po6_attainment|floatformat:2}}</th>
+        <th>{{po7_attainment|floatformat:2}}</th>
+        <th>{{po8_attainment|floatformat:2}}</th>
+        <th>{{po9_attainment|floatformat:2}}</th>
+        <th>{{po10_attainment|floatformat:2}}</th>
+        <th>{{po10_attainment|floatformat:2}}</th>
+        <th>{{po12_attainment|floatformat:2}}</th>
+        <th class="level" style="border-left: 5px solid black; width: 60px; height:60px">{{pso1_attainment|floatformat:2}}</th>
+        <th class="level">{{pso2_attainment|floatformat:2}}</th>
+        <th class="level">{{pso3_attainment|floatformat:2}}</th>
+      </tr>
+    </table>
+  </div>
+</div>
+</script>
+{%endblock%}

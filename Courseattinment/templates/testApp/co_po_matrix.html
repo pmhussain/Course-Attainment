@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+{%extends 'testApp/base.html'%}
+{%load static%}
+{%block content%}
+<link rel="stylesheet" href="{% static 'css/course_attainment_style.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<div class="container-fluid" align=left style="width:100%">
+  <div class="jumbotron">
+      <h1 style = "color: red; padding-bottom: 10px;">Enter CO-PO Matrix Values <a href="{%url 'edit_co_po_matrix'%}" class="btn btn-warning" style="float:right;"> Edit/Update CO-PO/PSO Values</a></h1>
+      {%include 'testApp/messages.html'%}
+      <form  method="post"> {%csrf_token%}
+        <table border=2 style="width:100%">
+          <tr>
+            <th>CO↓/PO→</th>
+            <th>PO1</th>
+            <th>PO2</th>
+            <th>PO3</th>
+            <th>PO4</th>
+            <th>PO5</th>
+            <th>PO6</th>
+            <th>PO7</th>
+            <th>PO8</th>
+            <th>PO9</th>
+            <th>PO10</th>
+            <th>PO11</th>
+            <th>PO12</th>
+            <th style="border-left: 5px solid black;">PSO1</th>
+            <th>PSO2</th>
+            <th>PSO3</th>
+          </tr>
+          {%for i in cos%}
+          <tr>
+            <th>
+              <select name="co_id{{i.id}}" id="co_id{{i.id}}" style="width: 100px; height:40px;" required>
+                <option value="{{i.id}}">{{i.co}}</option>
+              </select>
+            </th>
+            <th>
+              <select name="{{i.co}}_po1" id="{{i.co}}_po1" style="width: 70px; height:40px;text-align:center;" required>
+                <option value=0>-</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+              </select>
+            </th>
+            <th>
+              <select name="{{i.co}}_po2" id="{{i.co}}_po2" style="width: 70px; height:40px;text-align:center;" required>
+                <option value=0>-</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+              </select>
+            </th>
+            <th>
+              <select name="{{i.co}}_po3" id="{{i.co}}_po3" style="width: 70px; height:40px;text-align:center;" required>
+                <option value=0>-</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+              </select>
+            </th>
+            <th>
+              <select name="{{i.co}}_po4" id="{{i.co}}_po4" style="width: 70px; height:40px;text-align:center;" required>
+                <option value=0>-</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+              </select>
+            </th>
+            <th>
+              <select name="{{i.co}}_po5" id="{{i.co}}_po5" style="width: 70px; height:40px;text-align:center;" required>
+                <option value=0>-</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+              </select>
+            </th>
+            <th>
+              <select name="{{i.co}}_po6" id="{{i.co}}_po6" style="width: 70px; height:40px;text-align:center;" required>
+                <option value=0>-</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+              </select>
+            </th>
+            <th>
+              <select name="{{i.co}}_po7" id="{{i.co}}_po7" style="width: 70px; height:40px;text-align:center;" required>
+                <option value=0>-</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+              </select>
+            </th>
+            <th>
+              <select name="{{i.co}}_po8" id="{{i.co}}_po8" style="width: 70px; height:40px;text-align:center;" required>
+                <option value=0>-</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+              </select>
+            </th>
+            <th>
+              <select name="{{i.co}}_po9" id="{{i.co}}_po9" style="width: 70px; height:40px;text-align:center;" required>
+                <option value=0>-</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+              </select>
+            </th>
+            <th>
+              <select name="{{i.co}}_po10" id="{{i.co}}_po10" style="width: 70px; height:40px;text-align:center;" required>
+                <option value=0>-</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+              </select>
+            </th>
+            <th>
+              <select name="{{i.co}}_po11" id="{{i.co}}_po11" style="width: 70px; height:40px;text-align:center;" required>
+                <option value=0>-</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+              </select>
+            </th>
+            <th>
+              <select name="{{i.co}}_po12" id="{{i.co}}_po12" style="width: 70px; height:40px;text-align:center;" required>
+                <option value=0>-</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+              </select>
+            </th>
+            <th style="border-left: 5px solid black;">
+              <select name="{{i.co}}_pso1" id="{{i.co}}_pso1" style="width: 70px; height:40px;text-align:center;" required>
+                <option value=0>-</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+              </select>
+            </th>
+            <th>
+              <select name="{{i.co}}_pso2" id="{{i.co}}_pso2" style="width: 70px; height:40px;text-align:center;" required>
+                <option value=0>-</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+              </select>
+            </th>
+            <th>
+              <select name="{{i.co}}_pso3" id="{{i.co}}_pso3" style="width: 70px; height:40px;text-align:center;" required>
+                <option value=0>-</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+              </select>
+            </th>
+          </tr>
+          {%endfor%}
+        </table><br>
+        <input type="submit" name="" value="Submit" class="btn btn-primary btn-lg" style="float:right;">
+
+      </form>
+
+  </div>
+</div>
+
+{%endblock%}

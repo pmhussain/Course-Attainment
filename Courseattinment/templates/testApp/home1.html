@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+{%extends 'testApp/base.html'%}
+{%load static%}
+{%block content%}
+<link rel="stylesheet" href="{% static 'css/course_attainment_style.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<div class="container" align=center style="width:90%">
+  <div class="jumbotron">
+    <h1 style = "color: red; padding-bottom: 10px;"><u>CO Attainment, CO-PO & PSO Attainment</u></h1>
+
+    <table border=2 style="width:70%">
+
+      <tr>
+        <th colspan="2" rowspan="2">Examination</th>
+        <th colspan="4">MID-1 Threshold</th>
+        <th colspan="2">60%</th>
+        <th colspan="4">MID-2 Threshold</th>
+        <th colspan="2">60%</th>
+        <th rowspan="2">External Threshold (40%)</th>
+      </tr>
+
+      <tr>
+        <th colspan="4">Descriptive</th>
+        <th rowspan="2" style="vertical-align:top">Objective</th>
+        <th rowspan="2" style="vertical-align:top">Assignment</th>
+        <th colspan="4">Descriptive</th>
+        <th rowspan="2" style="vertical-align:top">Objective</th>
+        <th rowspan="2" style="vertical-align:top">Assignment</th>
+      </tr>
+
+      <tr>
+        <th colspan="2">Question Number</th>
+        <th>Q1</th>
+        <th>Q2</th>
+        <th>Q3</th>
+        <th>Q4</th>
+        <th>Q1</th>
+        <th>Q2</th>
+        <th>Q3</th>
+        <th>Q4</th>
+        <th>External</th>
+      </tr>
+
+      <tr>
+        <th colspan="2">Maximum Marks</th>
+        <th>5</th>
+        <th>5</th>
+        <th>5</th>
+        <th>5</th>
+        <th>10</th>
+        <th>5</th>
+        <th>5</th>
+        <th>5</th>
+        <th>5</th>
+        <th>5</th>
+        <th>10</th>
+        <th>5</th>
+        <th>75</th>
+      </tr>
+
+      <tr>
+        <th>Sl.No.</th>
+        <th>Roll No.</th>
+        {%for q in intenal_questions%}
+        <th>{{q.cos_mapped}}</th>
+        {%endfor%}
+        {%for q in external_questions%}
+        <th>{{q.cos_mapped}}</th>
+        {%endfor%}
+      </tr>
+      {%for mark in studentsmarks%}
+      <tr>
+        <th>{{forloop.counter}}</th>
+        <th>{{mark.rollno}}</th>
+        <th class='marks'>{{mark.m1_q1_marks}}</th>
+        <th class='marks'>{{mark.m1_q2_marks}}</th>
+        <th class='marks'>{{mark.m1_q3_marks}}</th>
+        <th class='marks'>{{mark.m1_q4_marks}}</th>
+        <th class='marks'>{{mark.m1_objective_marks}}</th>
+        <th class='marks'>{{mark.m1_assignment_marks}}</th>
+        <th class='marks'>{{mark.m2_q1_marks}}</th>
+        <th class='marks'>{{mark.m2_q2_marks}}</th>
+        <th class='marks'>{{mark.m2_q3_marks}}</th>
+        <th class='marks'>{{mark.m2_q4_marks}}</th>
+        <th class='marks'>{{mark.m2_objective_marks}}</th>
+        <th class='marks'>{{mark.m2_assignment_marks}}</th>
+        <th class='marks'>{{mark.ext_marks}}</th>
+
+      </tr>
+     {%endfor%}
+
+
+      <tr>
+        <th colspan="2">Total Number of Students Attempted (A)</th>
+        <th>{{m1_q1_attempt_count}}</th>
+        <th>{{m1_q2_attempt_count}}</th>
+        <th>{{m1_q3_attempt_count}}</th>
+        <th>{{m1_q4_attempt_count}}</th>
+        <th>{{m1_quiz_attempt_count}}</th>
+        <th>{{m1_assign_attempt_count}}</th>
+        <th>{{m2_q1_attempt_count}}</th>
+        <th>{{m2_q2_attempt_count}}</th>
+        <th>{{m2_q3_attempt_count}}</th>
+        <th>{{m2_q4_attempt_count}}</th>
+        <th>{{m2_quiz_attempt_count}}</th>
+        <th>{{m2_assign_attempt_count}}</th>
+        <th>{{ext_attempt_count}}</th>
+      </tr>
+      <tr>
+        <th colspan="2">Number of students scored >= Threshold (B)</th>
+        <th>{{m1_q1_gth_count}}</th>
+        <th>{{m1_q2_gth_count}}</th>
+        <th>{{m1_q3_gth_count}}</th>
+        <th>{{m1_q4_gth_count}}</th>
+        <th>{{m1_quiz_gth_count}}</th>
+        <th>{{m1_assign_gth_count}}</th>
+        <th>{{m2_q1_gth_count}}</th>
+        <th>{{m2_q2_gth_count}}</th>
+        <th>{{m2_q3_gth_count}}</th>
+        <th>{{m2_q4_gth_count}}</th>
+        <th>{{m2_quiz_gth_count}}</th>
+        <th>{{m2_assign_gth_count}}</th>
+        <th>{{ext_gth_count}}</th>
+      </tr>
+      <tr>
+        <th colspan="2">Actual  %of students on or above  Threshold C = B / A * 100 </th>
+        <th>{{m1_q1_gth_percnt}}%</th>
+        <th>{{m1_q2_gth_percnt}}%</th>
+        <th>{{m1_q3_gth_percnt}}%</th>
+        <th>{{m1_q4_gth_percnt}}%</th>
+        <th>{{m1_quiz_gth_percnt}}%</th>
+        <th>{{m1_assign_gth_percnt}}%</th>
+        <th>{{m2_q1_gth_percnt}}%</th>
+        <th>{{m2_q2_gth_percnt}}%</th>
+        <th>{{m2_q3_gth_percnt}}%</th>
+        <th>{{m2_q4_gth_percnt}}%</th>
+        <th>{{m2_quiz_gth_percnt}}%</th>
+        <th>{{m2_assign_gth_percnt}}%</th>
+        <th>{{ext_gth_percnt}}%</th>
+      </tr>
+
+      <tr>
+        <th colspan="2">Mapping with Course Outcome</th>
+        {%for q in intenal_questions%}
+        <th>{{q.cos_mapped}}</th>
+        {%endfor%}
+        {%for q in external_questions%}
+        <th>{{q.cos_mapped}}</th>
+        {%endfor%}
+      </tr>
+
+      <tr>
+        <th colspan="2">Attainment Level</th>
+        {%for q in intenal_questions%}
+        <th>{{q.attainment_level}}</th>
+        {%endfor%}
+        {%for q in external_questions%}
+        <th>{{q.attainment_level}}</th>
+        {%endfor%}
+      </tr>
+    </table>
+
+    <h1 style = "color: red; padding-bottom: 10px;">Attainment Levels</u></h1>
+    <table border=2 style="width:30%">
+      <tr>
+        <th colspan="3">SCALE</th>
+      </tr>
+      <tr>
+        <th>Low</th>
+        <th>1  </th>
+        <th>51% - 60%</th>
+      </tr>
+
+      <tr>
+        <th>Medium</th>
+        <th>2   </th>
+        <th>61% - 75%</th>
+      </tr>
+
+      <tr>
+        <th>High</th>
+        <th>3   </th>
+        <th>76% - 100%</th>
+      </tr>
+    </table>
+
+    <h1 style = "color: red; padding-bottom: 10px;">Indirect Survey Attainment</u></h1>
+    <table border=2 style="width:50%">
+      <tr>
+        <th>CO</th>
+        <th>High</th>
+        <th>Medium</th>
+        <th>Low</th>
+        <th>Attainment</th>
+      </tr>
+     {%for i in indirects%}
+      <tr>
+        <th>{{i.co}}</th>
+        <th>{{i.high}}</th>
+        <th>{{i.medium}}</th>
+        <th>{{i.low}}</th>
+        <th>{{i.attainment}}</th>
+      </tr>
+      {%endfor%}
+    </table>
+
+    <h1 style = "color: red; padding-bottom: 10px;">Course Attainment</u></h1>
+    <table border=2 style="width:70%">
+      <tr>
+        <th>Course Outcomes</th>
+        <th>Internal Assessment</th>
+        <th>External Assessment</th>
+        <th>Direct Attainment (DA = (X*30%)+(Y*70%))</th>
+        <th>Indirect Attainment </th>
+        <th>Final Attainment (FA = (DA*80%) + (IA*20%))</th>
+      </tr>
+
+     {%for i in course_attainment%}
+      <tr>
+        <th>{{i.co}}</th>
+        <th>{{i.internal|floatformat:2}}</th>
+        <th>{{i.external|floatformat:2}}</th>
+        <th>{{i.direct|floatformat:2}}</th>
+        <th>{{i.indirect.attainment|floatformat:2}}</th>
+        <th>{{i.final|floatformat:2}}</th>
+      </tr>
+      {%endfor%}
+      <tr>
+        <th colspan="5" style= " text-align:right; color:blue">Course Attainment Level</th>
+        <th>{{course_attainment_value|floatformat:2}}</th>
+      </tr>
+    </table>
+    <h1 style = "color: red; padding-bottom: 10px;">CO-PO/PSO Matrix</u></h1>
+    <table border=2 style="width:100%">
+      <tr>
+        <th>CO ↓ / PO →</th>
+        <th>PO1</th>
+        <th>PO2</th>
+        <th>PO3</th>
+        <th>PO4</th>
+        <th>PO5</th>
+        <th>PO6</th>
+        <th>PO7</th>
+        <th>PO8</th>
+        <th>PO9</th>
+        <th>PO10</th>
+        <th>PO11</th>
+        <th>PO12</th>
+        <th style="border-left: 5px solid black;">PSO1</th>
+        <th>PSO2</th>
+        <th>PSO3</th>
+
+      </tr>
+      {%for i in copolevels%}
+      <tr>
+        <th>{{i.co}}</th>
+        <th class="level">{{i.po1}}</th>
+        <th class="level">{{i.po2}}</th>
+        <th class="level">{{i.po3}}</th>
+        <th class="level" class="level" class="level">{{i.po4}}</th>
+        <th class="level" class="level">{{i.po5}}</th>
+        <th class="level">{{i.po6}}</th>
+        <th class="level">{{i.po7}}</th>
+        <th class="level">{{i.po8}}</th>
+        <th class="level">{{i.po9}}</th>
+        <th class="level">{{i.po10}}</th>
+        <th class="level">{{i.po11}}</th>
+        <th class="level">{{i.po12}}</th>
+        <th class="level" style="border-left: 5px solid black;" >{{i.pso1}}</th>
+        <th class="level">{{i.pso2}}</th>
+        <th class="level">{{i.pso3}}</th>
+      </tr>
+      {%endfor%}
+
+      <th>PO Correlation level</th>
+      <th class="level">{{po1_avg|floatformat:2}}</th>
+      <th class="level">{{po2_avg|floatformat:2}}</th>
+      <th class="level">{{po3_avg|floatformat:2}}</th>
+      <th class="level">{{po4_avg|floatformat:2}}</th>
+      <th class="level">{{po5_avg|floatformat:2}}</th>
+      <th class="level">{{po6_avg|floatformat:2}}</th>
+      <th class="level">{{po7_avg|floatformat:2}}</th>
+      <th class="level">{{po8_avg|floatformat:2}}</th>
+      <th class="level">{{po9_avg|floatformat:2}}</th>
+      <th class="level">{{po10_avg|floatformat:2}}</th>
+      <th class="level">{{po11_avg|floatformat:2}}</th>
+      <th class="level">{{po12_avg|floatformat:2}}</th>
+      <th class="level" style="border-left: 5px solid black; width: 60px; height:60px">{{pso1_avg}}</th>
+      <th class="level">{{pso2_avg}}</th>
+      <th class="level">{{pso3_avg}}</th>
+    </table><br>
+    <h1 style = "color: red; padding-bottom: 10px;">PO Attainment</u></h1>
+    <table border=2 style="width:100%">
+      <tr>
+        <th>PO / PSO →</th>
+        <th>PO1</th>
+        <th>PO2</th>
+        <th>PO3</th>
+        <th>PO4</th>
+        <th>PO5</th>
+        <th>PO6</th>
+        <th>PO7</th>
+        <th>PO8</th>
+        <th>PO9</th>
+        <th>PO10</th>
+        <th>PO11</th>
+        <th>PO12</th>
+        <th style="border-left: 5px solid black;">PSO1</th>
+        <th>PSO2</th>
+        <th>PSO3</th>
+      </tr>
+      <tr>
+        <th>Attainment Level</th>
+        <th class="level">{{po1_attainment|floatformat:2}}</th>
+        <th class="level">{{po2_attainment|floatformat:2}}</th>
+        <th class="level">{{po3_attainment|floatformat:2}}</th>
+        <th class="level">{{po4_attainment|floatformat:2}}</th>
+        <th class="level">{{po5_attainment|floatformat:2}}</th>
+        <th class="level">{{po6_attainment|floatformat:2}}</th>
+        <th class="level">{{po7_attainment|floatformat:2}}</th>
+        <th class="level">{{po8_attainment|floatformat:2}}</th>
+        <th class="level">{{po9_attainment|floatformat:2}}</th>
+        <th class="level">{{po10_attainment|floatformat:2}}</th>
+        <th class="level">{{po10_attainment|floatformat:2}}</th>
+        <th class="level">{{po12_attainment|floatformat:2}}</th>
+        <th class="level" style="border-left: 5px solid black; width: 60px; height:60px" >{{pso1_attainment|floatformat:2}}</th>
+        <th class="level" >{{pso2_attainment|floatformat:2}}</th>
+        <th class="level">{{pso3_attainment|floatformat:2}}</th>
+      </tr>
+    </table>
+
+    <h1 style = "color: red; padding-bottom: 10px;">CO Attainment Target Comparision</u></h1>
+    <table border=2 style="width:100%">
+      <tr>
+        <th>S.No.</th>
+        <th>COs</th>
+        <th>Target Level</th>
+        <th>Attained Level</th>
+        <th>Attained/Not Attained</th>
+      </tr>
+
+      {%for attainment in course_attainment%}
+      <tr>
+        <th>{{forloop.counter}}</th>
+        <th>{{attainment.co}}</th>
+        <th>1.68</th>
+        <th>{{attainment.final|floatformat:2}}</th>
+        <th>{% if attainment.final >= 1.68 %}
+  Attained
+{% endif %}</th>
+      </tr>
+      {%endfor%}
+    </table>
+    <br><br>
+   <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+  </div>
+</div>
+
+
+
+
+
+
+<script>
+const nodeList = document.querySelectorAll(".marks");
+for (let i = 0; i < nodeList.length; i++) {
+  if (nodeList[i].innerHTML == "None" || nodeList[i].innerHTML == "0" ){
+    // nodeList[i].style.backgroundColor = "red";
+    nodeList[i].innerHTML = "";
+  }
+}
+</script>
+
+<script>
+const nodeList1 = document.querySelectorAll(".level");
+for (let i = 0; i < nodeList1.length; i++) {
+  console.log(nodeList1[i].innerHTML)
+  if (nodeList1[i].innerHTML == "None" || nodeList1[i].innerHTML == 0 ){
+    // nodeList[i].style.backgroundColor = "red";
+    nodeList1[i].innerHTML = "-";
+  }
+}
+</script>
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+<script>
+const xValues = ["CO1", "CO2", "CO3", "CO4","CO5"];
+const y1Values = [1.68, 1.68, 1.68,1.68,1.68];
+const bar1Colors = ["blue", "blue","blue","blue","blue",];
+const y2Values = [{{co1_attained_value}}, {{co2_attained_value}}, {{co3_attained_value}},{{co4_attained_value}},{{co5_attained_value}}];
+const bar2Colors = ["green", "green","green","green","green",];
+new Chart("myChart", {
+type: "bar",
+data: {
+  labels: xValues,
+  datasets: [
+    {
+    backgroundColor: bar1Colors,
+    data: y1Values
+  },
+  {
+    backgroundColor: bar2Colors,
+    data: y2Values
+  }]
+},
+options: {
+
+scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            min: 0,
+            max: 3
+          }
+          }]
+},
+legend: {display: false},
+title: {
+display: true,
+text: "Subject Name - Attainment",
+}
+}
+});
+</script>
+{%endblock%}

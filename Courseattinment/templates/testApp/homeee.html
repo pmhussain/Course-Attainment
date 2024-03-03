@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{%extends 'testApp/base.html'%}
+{%load static%}
+{%block content%}
+<link rel="stylesheet" href="{% static 'css/course_attainment_style.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<div class="container-fluid" align=center style="width:100%">
+  <div class="jumbotron">
+    <h1 style = "color: red; padding-bottom: 10px;"><u>Home Page</u></h1>
+
+  </div>
+</div>
+
+<script>
+const nodeList = document.querySelectorAll(".marks");
+for (let i = 0; i < nodeList.length; i++) {
+  if (nodeList[i].innerHTML == "None"){
+    // nodeList[i].style.backgroundColor = "red";
+    nodeList[i].innerHTML = "";
+  }
+}
+</script>
+{%endblock%}
